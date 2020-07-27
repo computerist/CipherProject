@@ -10,8 +10,8 @@ class TextEntered
 {
     private $inputText;
     private $inputKey;
-   private $cipherType;
-   private const constantCipherType=['C', 'D'];
+    private $cipherType;
+    private const constantCipherType=['C', 'D'];
 
 
     public function __construct($inputText, $inputKey, $cipherType)

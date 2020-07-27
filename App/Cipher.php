@@ -3,11 +3,13 @@
 declare(strict_types=1);
 
 namespace App;
+
+include_once "./App/CipherBaseClass.php";
+
 class Cipher extends CipherBaseClass
 {
     public function CiperText($inputText, $key, $cipherType)
     {
-        echo "<INPUT=> $inputText><KEY=> $key><TYPE=> $cipherType> .\n";
 
         if ($cipherType <> "E") {
             $key = 26 - $key;
