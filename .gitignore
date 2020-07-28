@@ -1,9 +1,4 @@
+#Files to be ignored
 .DS_Store
 .idea
 vendor
-/generated
-
-!/composer.json
-!/composer.lock
-!/README.md
-!/.gitignore

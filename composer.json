@@ -14,7 +14,6 @@
     "ext-readline": "*"
   },
   "scripts": {
-    "run-cipher-test": "./vendor/bin/phpunit",
-    "run-cipher-project": "php ./index.php"
+    "run-cipher-test": "./vendor/bin/phpunit"
   }
 }
