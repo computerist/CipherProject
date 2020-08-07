@@ -3,10 +3,16 @@
 declare(strict_types=1);
 
 namespace App;
+
 require 'vendor/autoload.php';
 
-include_once "./App/Cipher.php";
+include_once "./App/CeasarCipher.php";
 do {
+    $cipherType =  strtoupper(readline("C = Ceaser      V = Vigenere    : "));
+    if ($cipherType <> 'C' and $cipherType  <> 'V' ) {
+        exit("ERROR: Incorrect cipher type has been entered".PHP_EOL);
+    }
+
     $inputText = readline("Text to cipher                  : ");
     if (empty($inputText) or (strlen($inputText) > 0 && strlen(trim($inputText)) == 0)) {
         exit("ERROR: Nothing has been entered".PHP_EOL);
@@ -22,13 +28,29 @@ do {
         exit("ERROR : Cipher key entered is less than 1 !!".PHP_EOL);
     }
 
-    $cipheredResult = new \App\Cipher();
-    $results = $cipheredResult ->CiperText($inputText,$cipherKey,$cipherMethod);
- //   $results = $cipheredResult->encrypt($inputText, $cipherKey);
+    if ($cipherType === 'C'){
+        if ($cipherMethod === 'D'){
+            $results = $cipheredResult = (new CeasarCipher($inputText,$cipherKey))->encrypt($inputText,$cipherKey);
+        }
+        else {
+            $results = $cipheredResult = (new CeasarCipher($inputText,$cipherKey))->decrypt($inputText,$cipherKey);
+        }
+    }
+    else {
+        if ($cipherMethod === 'D'){
+            $results = $cipheredResult = (new VigenereCipher($inputText,$cipherKey))->encrypt($inputText,$cipherKey);
+        }
+        else {
+            $results = $cipheredResult = (new VigenereCipher($inputText,$cipherKey))->decrypt($inputText,$cipherKey);
+        }
+    }
+
+
     echo "Original Text entered          => $inputText \n";
     echo "Ciphered Text                  => $results \n";
 
     $continue = strtoupper(readline("Do you want to cipher any more? (Y/N)"));
 
 } while ($continue == 'Y');
+
 echo "Goodbye \n";

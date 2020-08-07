@@ -13,7 +13,6 @@ use App\Cipher;
 class CipherTest extends TestCase
 {
     private $sut;
-    private $cipher;
     /**
      * A module that is called at the beginning of every test
      *

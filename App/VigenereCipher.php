@@ -6,15 +6,19 @@ namespace App;
 
 include_once "./App/CipherBaseClass.php";
 
-class Cipher extends CipherBaseClass
+class VigenereCipher extends CipherBaseClass
 {
-    public function CiperText(string $inputText,  $key,  $cipherType) : string
+
+    public function encrypt($inputText, $key)
     {
-        if ($cipherType <> "E") {
-            $key = 26 - $key;
-       }
+        $newKey = 26 - $key;
+        return $outputText = $this->decrypt($inputText, $newKey);
+    }
+
+    public function decrypt($cipherText, $key)
+    {
         $outputText = "";
-        $inputArray = str_split($inputText);
+        $inputArray = str_split($cipherText);
         foreach ($inputArray as $inputChar) {
             if (!ctype_alpha($inputChar)) {
                 $cipheredChar = $inputChar;
@@ -27,7 +31,9 @@ class Cipher extends CipherBaseClass
                 $cipheredChar = chr($ciperAsciiValue);
             }
             $outputText .= $cipheredChar;
-         }
+        }
         return $outputText;
     }
+
+
 }
