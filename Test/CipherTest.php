@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 use PHPUnit\Framework\TestCase;
 
-/** @test
- *
+use App\Cipher;
+/**
  * This module holds the unit tests that were carried out to ensure that the Caesar cipher works correctly.
  * Each test requires the user to enter in the actual text to cipher, the key (the number of places each
  * character needs to move) and the method of ciphering (Encryption  or Decryption).
@@ -14,26 +12,28 @@ use PHPUnit\Framework\TestCase;
  */
 class CipherTest extends TestCase
 {
+    private $sut;
+    private $cipher;
     /**
-     * A basic test to ensure that the command to run the unit test works
+     * A module that is called at the beginning of every test
      *
      */
-    public function testBasicTest(){
-        $this-> assertTrue(true);
+    public function setUp():void 
+    {
+        $this->sut = new Cipher();
     }
     /**
      * Test : to move all characters in one word forward at a time.
      * Am NOT testing looping around Z with this test
      *
      */
-    public function testOneWordMovesCorrectNumberForward(){
-        $userText = 'Hell8e';
-        $expectedResult = 'Jgnn8g';
+    public function testOneWordMovesCorrectNumberForward():void {
+        $userText = "Hell8o";
+        $expectedResult = 'Jgnn8q';
         $userKeys = 2;
         $cipherType = 'E';  //Encrypt
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
-    }
+        $this ->assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
+   }
     /**
      * Test : to move all words in a sentence forward.
      * Am NOT testing looping around Z with this test
@@ -44,8 +44,7 @@ class CipherTest extends TestCase
         $expectedResult = 'Jgnnq Dqq. Vjcvu tkijv!';
         $userKeys = 2;
         $cipherType = 'E';   //Encrypt
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+        $this -> assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to move all characters in a word forward, looping around the letter Z.
@@ -57,8 +56,7 @@ class CipherTest extends TestCase
         $expectedResult = 'Zab';
         $userKeys = 2;
         $cipherType = 'E';   //Encrypt
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+        $this -> assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to move all words in a sentence forward, loop around the letter Z
@@ -74,8 +72,7 @@ class CipherTest extends TestCase
         $expectedResult = 'Jgnnq aqw.  Agu Aqw Ot Bqtda!';
         $cipherType = 'E';   //c
         $userKeys = 2;
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+        $this -> assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to move all characters in one word backward at a time.
@@ -87,8 +84,7 @@ class CipherTest extends TestCase
         $expectedResult = 'Hello ';
         $userKeys = 2;
         $cipherType = 'D';   //Decrypt
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+        $this -> assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to move all characters in a word backward, looping around the letter A to Z.
@@ -100,8 +96,7 @@ class CipherTest extends TestCase
         $expectedResult = 'y';
         $userKeys = 4;
         $cipherType = 'D';   //Decrypt
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+        $this -> assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to move all words in a sentence backward, loop around the letter A
@@ -118,8 +113,8 @@ class CipherTest extends TestCase
         $expectedResult = 'Why am I doing this now Zaccery?';
         $userKeys = 2;
         $cipherType = 'D';   //Decrypt
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+       
+        $this -> assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to move all words in a sentence forward, loop around the letter A
@@ -136,8 +131,8 @@ class CipherTest extends TestCase
         $expectedResult = 'Vjg swkem dtqyp hqz lworu qxgt vjg ncba fqi';
         $userKeys = 2;
         $cipherType = 'E';   //Encrypt
-        $userInput = new \App\Cipher();
-        $this -> assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+       
+        $this -> assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * @dataProvider dataProviderForCipher
@@ -146,8 +141,8 @@ class CipherTest extends TestCase
      *
      */
     public function testUsingDataProviderToGiveData($userText, $expectedResult, $userKeys,$cipherType ){
-        $userInput = new \App\Cipher();
-        $this ->assertSame($expectedResult, $userInput->CiperText($userText,$userKeys,$cipherType));
+       
+        $this ->assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to store all the data needed for the unit tests in one module

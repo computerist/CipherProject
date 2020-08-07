@@ -24,7 +24,7 @@ do {
 
     $cipheredResult = new \App\Cipher();
     $results = $cipheredResult ->CiperText($inputText,$cipherKey,$cipherMethod);
-
+ //   $results = $cipheredResult->encrypt($inputText, $cipherKey);
     echo "Original Text entered          => $inputText \n";
     echo "Ciphered Text                  => $results \n";
 

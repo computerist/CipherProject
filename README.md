@@ -1,4 +1,4 @@
-<h1 style="align-content: center">Cipher Project</h1>  
+<h1 style="align-content: center">Ceaser Cipher Project</h1>  
  
 ## Background
   This cipher is named after the legendary

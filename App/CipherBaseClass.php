@@ -1,14 +1,20 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App;
+
 class CipherBaseClass
 {
-    /**
-     * CipherBaseClass constructor.
-     */
-    public function __construct(){
+    private $key;
+    private $inputText;
+    private $cipherText;
 
+    public function encrypt($inputText, $key) {
+        /* this doesn't actually do anything */
+        // maybe throw an error?
+    }
+
+    public function decrypt($cipherText, $key) {
+        /* this doesn't actually do anything */
+        // maybe throw an error?
     }
 }
