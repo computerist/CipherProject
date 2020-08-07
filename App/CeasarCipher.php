@@ -8,23 +8,33 @@ include_once "./App/CipherBaseClass.php";
 
 class CeasarCipher extends CipherBaseClass
 {
+    /**
+     * @var int
+     */
+    private $key;
 
-    public function encrypt($inputText, $key)
+    public function __construct(string $cipherText,int $key)
     {
-        $newKey = 26 - $key;
-        return $outputText = $this->decrypt($inputText, $newKey);
+        parent::__construct($cipherText);
+        $this->key = $key;
     }
 
-    public function decrypt($cipherText, $key)
+    public function decrypt()
+    {
+        $this->key = 26 - $this->key;
+        return $outputText = $this->encrypt();
+    }
+
+    public function encrypt()
     {
         $outputText = "";
-        $inputArray = str_split($cipherText);
+        $inputArray = str_split($this->cipherText);
         foreach ($inputArray as $inputChar) {
             if (!ctype_alpha($inputChar)) {
                 $cipheredChar = $inputChar;
             } else {
                 $offsetValue = ord(ctype_upper($inputChar) ? 'A' : 'a');
-                $ciperAsciiValue = ord($inputChar) + $key;
+                $ciperAsciiValue = ord($inputChar) + $this->key;
                 $ciperAsciiValue = $ciperAsciiValue - $offsetValue;
                 $ciperAsciiValue = $ciperAsciiValue % 26;
                 $ciperAsciiValue = $ciperAsciiValue + $offsetValue;
@@ -34,6 +44,4 @@ class CeasarCipher extends CipherBaseClass
         }
         return $outputText;
     }
-
-
 }

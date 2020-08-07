@@ -1,26 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 class CipherBaseClass
 {
-    private $key;
-    private $cipherText;
+    protected $cipherText;
 
     /**
      * CipherBaseClass constructor.
-     * @param $key
      * @param $cipherText
      */
-    public function __construct($key, $cipherText){
-        $this-> key = $key;
-        $this-> cipherText = $cipherText;
+    public function __construct($cipherText){
+
+        $this->cipherText = $cipherText;
     }
-    public function encrypt($cipherText, $key) {
+
+    public function encrypt() {
         /* this doesn't actually do anything */
         // maybe throw an error?
     }
-    public function decrypt($cipherText, $key) {
+
+    public function decrypt() {
         /* this doesn't actually do anything */
         // maybe throw an error?
     }

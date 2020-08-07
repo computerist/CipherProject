@@ -9,13 +9,13 @@ include_once "./App/CipherBaseClass.php";
 class VigenereCipher extends CipherBaseClass
 {
 
-    public function encrypt($inputText, $key)
+    public function encrypt($inputText)
     {
         $newKey = 26 - $key;
-        return $outputText = $this->decrypt($inputText, $newKey);
+        return $outputText = $this->decrypt($inputText);
     }
 
-    public function decrypt($cipherText, $key)
+    public function decrypt($cipherText)
     {
         $outputText = "";
         $inputArray = str_split($cipherText);

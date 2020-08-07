@@ -30,21 +30,20 @@ do {
 
     if ($cipherType === 'C'){
         if ($cipherMethod === 'D'){
-            $results = $cipheredResult = (new CeasarCipher($inputText,$cipherKey))->encrypt($inputText,$cipherKey);
+            $results = $cipheredResult = (new CeasarCipher($cipherKey))->encrypt($inputText);
         }
         else {
-            $results = $cipheredResult = (new CeasarCipher($inputText,$cipherKey))->decrypt($inputText,$cipherKey);
+            $results = $cipheredResult = (new CeasarCipher($cipherKey))->decrypt($inputText);
         }
     }
     else {
         if ($cipherMethod === 'D'){
-            $results = $cipheredResult = (new VigenereCipher($inputText,$cipherKey))->encrypt($inputText,$cipherKey);
+            $results = $cipheredResult = (new VigenereCipher($cipherKey))->encrypt($inputText);
         }
         else {
-            $results = $cipheredResult = (new VigenereCipher($inputText,$cipherKey))->decrypt($inputText,$cipherKey);
+            $results = $cipheredResult = (new VigenereCipher($cipherKey))->decrypt($inputText);
         }
     }
-
 
     echo "Original Text entered          => $inputText \n";
     echo "Ciphered Text                  => $results \n";
