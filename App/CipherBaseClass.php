@@ -17,13 +17,4 @@ class CipherBaseClass
         $this->cipherText = $cipherText;
     }
 
-    public function encrypt() {
-        /* this doesn't actually do anything */
-        // maybe throw an error?
-    }
-
-    public function decrypt() {
-        /* this doesn't actually do anything */
-        // maybe throw an error?
-    }
 }

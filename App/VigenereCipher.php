@@ -6,34 +6,50 @@ namespace App;
 
 include_once "./App/CipherBaseClass.php";
 
-class VigenereCipher extends CipherBaseClass
+class VigenereCipher extends CipherBaseClass implements CipherInterface
 {
+    /**
+     * @var int
+     */
+    private $key;
 
-    public function encrypt($inputText)
+    /**
+     * CeasarCipher constructor.
+     * @param string $cipherText
+     * @param int $key
+     */
+
+    public function __construct(string $cipherText, int $key)
     {
-        $newKey = 26 - $key;
-        return $outputText = $this->decrypt($inputText);
+        parent::__construct($cipherText);
+        $this->key = $key;
     }
 
-    public function decrypt($cipherText)
+    private function shiftingChars(): string
     {
-        $outputText = "";
-        $inputArray = str_split($cipherText);
+        $outputText = '';
+        $inputArray = str_split($this->cipherText);
         foreach ($inputArray as $inputChar) {
             if (!ctype_alpha($inputChar)) {
                 $cipheredChar = $inputChar;
             } else {
-                $offsetValue = ord(ctype_upper($inputChar) ? 'A' : 'a');
-                $ciperAsciiValue = ord($inputChar) + $key;
-                $ciperAsciiValue = $ciperAsciiValue - $offsetValue;
-                $ciperAsciiValue = $ciperAsciiValue % 26;
-                $ciperAsciiValue = $ciperAsciiValue + $offsetValue;
-                $cipheredChar = chr($ciperAsciiValue);
+                $offsetValue  = ord(ctype_upper($inputChar) ? 'A' : 'a');
+                $cipheredChar = chr((((ord($inputChar) + $this->key) - $offsetValue) % 26) + $offsetValue);
             }
             $outputText .= $cipheredChar;
         }
         return $outputText;
     }
 
+    public function decrypt(): string
+    {
+        $this->key = 26 - $this->key;
+        return $this->shiftingChars();
+    }
 
+    public function encrypt(): string
+    {
+        return $this->shiftingChars();
+
+    }
 }
