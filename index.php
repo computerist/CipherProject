@@ -30,10 +30,10 @@ do {
 
     if ($cipherType === 'C'){
         if ($cipherMethod === 'D'){
-            $results = $cipheredResult = (new CeasarCipher($cipherKey))->encrypt($inputText);
+            $results = $cipheredResult = (new CeasarCipher($inputText,$cipherKey))->encrypt();
         }
         else {
-            $results = $cipheredResult = (new CeasarCipher($cipherKey))->decrypt($inputText);
+            $results = $cipheredResult = (new CeasarCipher($inputText, $cipherKey))->decrypt();
         }
     }
     else {

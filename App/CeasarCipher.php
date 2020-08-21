@@ -19,13 +19,7 @@ class CeasarCipher extends CipherBaseClass
         $this->key = $key;
     }
 
-    public function decrypt()
-    {
-        $this->key = 26 - $this->key;
-        return $outputText = $this->encrypt();
-    }
-
-    public function encrypt()
+    public function moveCharactersForward()
     {
         $outputText = "";
         $inputArray = str_split($this->cipherText);
@@ -43,5 +37,17 @@ class CeasarCipher extends CipherBaseClass
             $outputText .= $cipheredChar;
         }
         return $outputText;
+    }
+
+    public function decrypt()
+    {
+        $this->key = 26 - $this->key;
+        return $this->moveCharactersForward();
+    }
+
+    public function encrypt()
+    {
+        return $this->moveCharactersForward();
+
     }
 }
