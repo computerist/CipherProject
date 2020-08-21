@@ -34,7 +34,7 @@ class CeasarCipher extends CipherBaseClass
                 $cipheredChar = $inputChar;
             } else {
                 $offsetValue = ord(ctype_upper($inputChar) ? 'A' : 'a');
-                $cipheredChar= chr(((( ord($inputChar) + $this->key) - $offsetValue)% 26)+ $offsetValue);
+                $cipheredChar= chr((((ord($inputChar) + $this->key) - $offsetValue) % 26) + $offsetValue);
            }
             $outputText .= $cipheredChar;
         }

@@ -13,16 +13,6 @@ use App\Cipher;
 class CipherTest extends TestCase
 {
     private $sut;
-
-    /**
-     * A module that is called at the beginning of every test
-     *
-     */
-//    public function setUp():void
-//    {
-//        $key = 2;
-//        $this->sut = new \App\CeasarCipher($key);
-//    }
     /**
      * Test : to move all characters in one word forward at a time.
      * Am NOT testing looping around Z with this test
@@ -32,7 +22,6 @@ class CipherTest extends TestCase
         $userText = "Hell8o";
         $expectedResult = 'Jgnn8q';
         $userKeys = 2;
-        $cipherType = 'E';  //Encrypt
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this ->assertSame($expectedResult, $this->sut->encrypt());
    }
@@ -40,7 +29,6 @@ class CipherTest extends TestCase
         $userText = 'Jgnnq ';
         $expectedResult = 'Hello ';
         $userKeys = 2;
-        $cipherType = 'D';   //Decrypt
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this -> assertSame($expectedResult, $this->sut->decrypt());
     }
@@ -53,7 +41,6 @@ class CipherTest extends TestCase
         $userText ='Hello Boo. Thats right!';
         $expectedResult = 'Jgnnq Dqq. Vjcvu tkijv!';
         $userKeys = 2;
-        $cipherType = 'E';   //Encrypt
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this -> assertSame($expectedResult, $this->sut->encrypt());
     }
@@ -66,7 +53,6 @@ class CipherTest extends TestCase
         $userText = 'Xyz';
         $expectedResult = 'Zab';
         $userKeys = 2;
-        $cipherType = 'E';   //Encrypt
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this -> assertSame($expectedResult, $this->sut->encrypt());
     }
@@ -82,17 +68,10 @@ class CipherTest extends TestCase
     public function testSentenceMovesForwardAroundZ(){
         $userText ='Hello you.  Yes You Mr Zorby!';
         $expectedResult = 'Jgnnq aqw.  Agu Aqw Ot Bqtda!';
-        $cipherType = 'E';   //c
         $userKeys = 2;
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this -> assertSame($expectedResult, $this->sut->encrypt());
     }
-//    /**
-//     * Test : to move all characters in one word backward at a time.
-//     * Am NOT testing looping around A with this test
-//     *
-//     */
-
     /**
      * Test : to move all characters in a word backward, looping around the letter A to Z.
      * For example if the input was 'A' and the key was 2 then the loop would go from A, Z, to Y
@@ -102,7 +81,6 @@ class CipherTest extends TestCase
         $userText = 'c';
         $expectedResult = 'y';
         $userKeys = 4;
-        $cipherType = 'D';   //Decrypt
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this -> assertSame($expectedResult, $this->sut->decrypt());
     }
@@ -120,7 +98,6 @@ class CipherTest extends TestCase
         $userText = 'Yja co K fqkpi vjku pqy Bceegta?';
         $expectedResult = 'Why am I doing this now Zaccery?';
         $userKeys = 2;
-        $cipherType = 'D';   //Decrypt
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this -> assertSame($expectedResult, $this->sut->decrypt());
     }
@@ -138,7 +115,6 @@ class CipherTest extends TestCase
         $userText = 'The quick brown fox jumps over the lazy dog';
         $expectedResult = 'Vjg swkem dtqyp hqz lworu qxgt vjg ncba fqi';
         $userKeys = 2;
-        $cipherType = 'E';   //Encrypt
         $this->sut = new \App\CeasarCipher($userText, $userKeys);
         $this -> assertSame($expectedResult, $this->sut->encrypt());
     }
@@ -155,9 +131,6 @@ class CipherTest extends TestCase
         } else {
             $this -> assertSame($expectedResult, $this->sut->decrypt());
         }
-//
-//
-//        $this->assertSame($expectedResult, $this->sut->CiperText($userText,$userKeys,$cipherType));
     }
     /**
      * Test : to store all the data needed for the unit tests in one module
