@@ -13,27 +13,29 @@ class CeasarCipher extends CipherBaseClass
      */
     private $key;
 
+    /**
+     * CeasarCipher constructor.
+     * @param string $cipherText
+     * @param int $key
+     */
+
     public function __construct(string $cipherText,int $key)
     {
         parent::__construct($cipherText);
         $this->key = $key;
     }
 
-    public function moveCharactersForward()
+    public function shiftingCharsForward()
     {
-        $outputText = "";
+        $outputText = '';
         $inputArray = str_split($this->cipherText);
         foreach ($inputArray as $inputChar) {
             if (!ctype_alpha($inputChar)) {
                 $cipheredChar = $inputChar;
             } else {
                 $offsetValue = ord(ctype_upper($inputChar) ? 'A' : 'a');
-                $ciperAsciiValue = ord($inputChar) + $this->key;
-                $ciperAsciiValue = $ciperAsciiValue - $offsetValue;
-                $ciperAsciiValue = $ciperAsciiValue % 26;
-                $ciperAsciiValue = $ciperAsciiValue + $offsetValue;
-                $cipheredChar = chr($ciperAsciiValue);
-            }
+                $cipheredChar= chr(((( ord($inputChar) + $this->key) - $offsetValue)% 26)+ $offsetValue);
+           }
             $outputText .= $cipheredChar;
         }
         return $outputText;
@@ -42,12 +44,12 @@ class CeasarCipher extends CipherBaseClass
     public function decrypt()
     {
         $this->key = 26 - $this->key;
-        return $this->moveCharactersForward();
+        return $this->shiftingCharsForward();
     }
 
     public function encrypt()
     {
-        return $this->moveCharactersForward();
+        return $this->shiftingCharsForward();
 
     }
 }
