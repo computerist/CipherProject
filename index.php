@@ -22,12 +22,19 @@ do {
     if ($cipherMethod <> 'E' and $cipherMethod <> 'D') {
         exit("ERROR: Incorrect method has been entered" . PHP_EOL);
     }
-
-    $cipherKey = (int)readline("Cipher shift key number (>0)    : ");
-    if ($cipherKey < 1) {
-        exit("ERROR : Cipher key entered is less than 1 !!" . PHP_EOL);
+    if ($cipherMethod == 'V'){
+        $cipherKey = int(readline("Cipher shift key number (>0)    : "));
+        if ($cipherKey < 1) {
+            exit("ERROR : Cipher key entered is less than 1 !!" . PHP_EOL);
+        }
     }
-    $newclass = new CeasarCipher($inputText, $cipherKey);    // be default
+    else {
+        $cipherKey = readline("Cipher shift key number (>0)    : ");
+        if ($cipherKey == "") {
+            exit("ERROR : Cipher key entered empty !!" . PHP_EOL);
+        }
+    }
+    $newclass = new CeasarCipher($inputText, (int)$cipherKey);    // be default
     if ($cipherType === 'V') {
         $newclass = new VigenereCipher($inputText, $cipherKey);
     }
