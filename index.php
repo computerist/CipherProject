@@ -34,14 +34,14 @@ do {
             exit("ERROR : Cipher key entered empty !!" . PHP_EOL);
         }
     }
-    $newclass = new CeasarCipher($inputText, (int)$cipherKey);    // be default
+    $newclass = new CeasarCipher((int)$cipherKey);    // be default
     if ($cipherType === 'V') {
         $newclass = new VigenereCipher($inputText, $cipherKey);
     }
     if ($cipherMethod === 'D') {
-        $results = $newclass->decrypt();
+        $results = $newclass->decrypt($inputText);
     } else {
-        $results = $newclass->encrypt();
+        $results = $newclass->encrypt($inputText);
     }
     echo "Original Text entered          => $inputText \n";
     echo "Ciphered Text                  => $results \n";

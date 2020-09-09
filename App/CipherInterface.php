@@ -7,7 +7,7 @@ namespace App;
 interface CipherInterface
 {
 
-    public function encrypt();
+    public function encrypt(string $plainText);
 
-    public function decrypt();
+    public function decrypt(string $cipherText);
 }
